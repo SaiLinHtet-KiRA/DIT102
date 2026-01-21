@@ -178,12 +178,7 @@ public class Calculator extends javax.swing.JFrame {
 
     private void CalculateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateBtnActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_CalculateBtnActionPerformed
-
-    private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
-        // TODO add your handling code here:
-         int x=Integer.parseInt(InputNum1Field.getText());
+       int x=Integer.parseInt(InputNum1Field.getText());
         int y=Integer.parseInt(InputNum2Field.getText());
         int z=Integer.parseInt(InputNum3Field.getText());
         int max=Math.max(Math.max(x,y),z);
@@ -191,6 +186,17 @@ public class Calculator extends javax.swing.JFrame {
 
         InputMaxField.setText(max+" ");
         InputMinField.setText(min+" ");
+    }//GEN-LAST:event_CalculateBtnActionPerformed
+
+    private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
+        // TODO add your handling code here:
+       InputNum1Field.setText("");
+        InputNum2Field.setText("");
+       InputNum3Field.setText("");
+       InputMaxField.setText("");
+       InputMinField.setText("");
+InputNum1Field.requestFocus();
+
     }//GEN-LAST:event_ClearBtnActionPerformed
 
     /**
