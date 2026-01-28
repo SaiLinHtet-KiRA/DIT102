@@ -185,7 +185,13 @@ public class RandomAndSun extends javax.swing.JFrame {
     private void randombtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_randombtnActionPerformed
         // TODO add your handling code here:
         Random random=new Random();
+
         int value=random.nextInt(10)+1;
+         int value2=random.nextInt(10)+1;
+        int valu3=random.nextInt(10)+1;
+        txtnum1.setText(value+"");
+        txtnum2.setText(value+"");
+
         txtnum3.setText(value+"");
 
         
