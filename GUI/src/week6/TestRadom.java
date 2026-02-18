@@ -103,7 +103,7 @@ public class TestRadom extends javax.swing.JFrame {
                 min =num;
             
             }else if(num > min && num< min2){
-                min = num;
+                min2 = num;
             }
         }
         ans += "\nMax =" +max;
