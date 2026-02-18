@@ -153,11 +153,8 @@ for(int i=input.length()-1;i >= 0;i--){
         }
                 
         for(int i=0;i< input.length();i++){
-            for(int z=0;z<2;z++){
-                doubleTxt += input.charAt(i);
-
-            }
-
+            
+                doubleTxt += input.charAt(i)+""+ input.charAt(i);
         }               txtReverse.setText(reverseTxt);
 
                txtDouble.setText(doubleTxt);
