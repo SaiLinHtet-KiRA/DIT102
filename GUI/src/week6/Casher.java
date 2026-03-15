@@ -272,8 +272,6 @@ public class Casher extends javax.swing.JFrame {
             else if(i==10){txt25c.setText(value+"");}
         }
         txtRemain.setText(f.format(money));
-        
-        
     }//GEN-LAST:event_btnShowActionPerformed
 
     private void txt5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt5ActionPerformed

@@ -2,20 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package week6;
-
-import java.util.Random;
+package week7;
 
 /**
  *
  * @author Sai Lin Htet
  */
-public class TestRadom extends javax.swing.JFrame {
+public class TaxCalculator extends javax.swing.JFrame {
 
     /**
-     * Creates new form TestRadom
+     * Creates new form TaxCalculator
      */
-    public TestRadom() {
+    public TaxCalculator() {
         initComponents();
     }
 
@@ -28,12 +26,17 @@ public class TestRadom extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        txtSalary = new javax.swing.JTextField();
+        txtTax = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         btnCalculate = new javax.swing.JButton();
-        btnClear = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtOutput = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Salary");
+
+        jLabel2.setText("Tax");
 
         btnCalculate.setText("calculate");
         btnCalculate.addActionListener(new java.awt.event.ActionListener() {
@@ -42,36 +45,38 @@ public class TestRadom extends javax.swing.JFrame {
             }
         });
 
-        btnClear.setText("clear");
-
-        txtOutput.setColumns(20);
-        txtOutput.setRows(5);
-        jScrollPane1.setViewportView(txtOutput);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCalculate)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCalculate)
-                        .addGap(74, 74, 74)
-                        .addComponent(btnClear)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTax, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                            .addComponent(txtSalary))))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCalculate)
-                    .addComponent(btnClear))
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(btnCalculate)
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,40 +84,8 @@ public class TestRadom extends javax.swing.JFrame {
 
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
         // TODO add your handling code here:
-        Random rdn=new Random();
-        int num=0;
-        String ans= "";
-        int max=1;
-        int max2=1;
-        int min=100;
-         int min2=100;
-
-        for(int i=0;i<10;i++){
-            num = rdn.nextInt(100)+1;
-            ans += "Number "+i+ " = "+ num+"\n";
-            if(num>max){
-                max2=max;
-                max =num;
-            
-            }else if(num < max && num> max2){
-                max2 = num;
-            }
-            if(num<min){
-                min2=min;
-                min =num;
-            
-            }else if(num > min && num< min2){
-                min2 = num;
-            }
-        }
-        
-        ans += "\nMax =" +max;
-        ans += "\nMax2 =" +max2;
-
-        ans += "\nMin =" +min;
-        ans += "\nMin2 =" +min2;
-
-        txtOutput.setText(ans);
+        int m=Integer.parseInt(txtSalary.getText());
+        int tax=0;
     }//GEN-LAST:event_btnCalculateActionPerformed
 
     /**
@@ -132,28 +105,29 @@ public class TestRadom extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TestRadom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TaxCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TestRadom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TaxCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TestRadom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TaxCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TestRadom.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TaxCalculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TestRadom().setVisible(true);
+                new TaxCalculator().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalculate;
-    private javax.swing.JButton btnClear;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txtOutput;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField txtSalary;
+    private javax.swing.JTextField txtTax;
     // End of variables declaration//GEN-END:variables
 }
