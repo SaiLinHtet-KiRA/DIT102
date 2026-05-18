@@ -3,6 +3,7 @@ import FileManager.FileManager;
 import javax.swing.JOptionPane;
 import dataController.Controller;
 import helper.Helper;
+import java.util.ArrayList;
 import java.util.List;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,11 +17,13 @@ import java.util.List;
 public class Profile extends javax.swing.JFrame {
 
     String[] userInfo=new String[12];
+    ArrayList<String> record = new ArrayList<String>();
     /**
      * Creates new form NewJFrame
      */
-    public Profile(String[] userInfo) {
+    public Profile(String[] userInfo,ArrayList<String> record) {
         this.userInfo=userInfo.clone();
+        this.record=record;
         initComponents();
     }
 
@@ -38,7 +41,6 @@ public class Profile extends javax.swing.JFrame {
         _home = new javax.swing.JButton();
         _profile = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        _age = new javax.swing.JSlider();
         _maleRB = new javax.swing.JRadioButton();
         _femaleRB = new javax.swing.JRadioButton();
         _otherRB = new javax.swing.JRadioButton();
@@ -46,10 +48,8 @@ public class Profile extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         _height = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        _age_value = new javax.swing.JLabel();
         _phone = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -64,6 +64,7 @@ public class Profile extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         _hobby = new javax.swing.JComboBox<>();
+        _profile1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(800, 600));
@@ -81,16 +82,6 @@ public class Profile extends javax.swing.JFrame {
         _profile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 _profileActionPerformed(evt);
-            }
-        });
-
-        _age.setMaximum(60);
-        _age.setMinimum(16);
-        _age.setValue(Integer.parseInt(this.userInfo[6]));
-        _age.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        _age.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                _ageStateChanged(evt);
             }
         });
 
@@ -141,13 +132,9 @@ public class Profile extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Age");
-
         jLabel4.setText("Gender");
 
         jLabel5.setText("Zodic");
-
-        _age_value.setText(this.userInfo[6]);
 
         _phone.setText(this.userInfo[5]);
         _phone.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -212,66 +199,57 @@ public class Profile extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(55, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(_phone, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                                .addComponent(_name)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(_maleRB)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(_femaleRB)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(_otherRB))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(_zodic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel12)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(_hobby, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel11))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel5))
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(_maleRB)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(_femaleRB)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(_otherRB))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(_age, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(_age_value))
-                                    .addComponent(_phone)
-                                    .addComponent(_name)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(_zodic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(jLabel8)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(_height, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(jLabel12)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(_hobby, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(jLabel9)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(weight)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(_weight, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel10)))))))
+                                .addComponent(_height, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9)
+                                .addGap(24, 24, 24)
+                                .addComponent(weight)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(_weight, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10)))
                         .addGap(26, 26, 26))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(_update)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 68, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(113, 113, 113))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(11, 11, 11))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,43 +261,47 @@ public class Profile extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_age, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(_age_value))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_otherRB)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(_maleRB)
-                    .addComponent(_femaleRB))
-                .addGap(7, 7, 7)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(_maleRB)
+                        .addComponent(_femaleRB)
+                        .addComponent(_otherRB)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(_zodic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12)
                         .addComponent(_hobby, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_height, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
+                    .addComponent(_height, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(weight)
                     .addComponent(_weight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(_update)
                 .addGap(57, 57, 57))
         );
+
+        _profile1.setText("Record");
+        _profile1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        _profile1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _profile1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -328,9 +310,10 @@ public class Profile extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_profile1)
                     .addComponent(_home)
                     .addComponent(_profile))
-                .addContainerGap(724, Short.MAX_VALUE))
+                .addContainerGap(757, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(218, 218, 218)
@@ -344,7 +327,9 @@ public class Profile extends javax.swing.JFrame {
                 .addComponent(_home)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(_profile)
-                .addContainerGap(506, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(_profile1)
+                .addContainerGap(487, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(38, 38, 38)
@@ -375,16 +360,11 @@ public class Profile extends javax.swing.JFrame {
 
     private void _homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__homeActionPerformed
         // TODO add your handling code here:
-        Home home=new Home(this.userInfo);
+        Home home=new Home(this.userInfo,this.record);
         setVisible(false);
         home.setVisible(true);
 
     }//GEN-LAST:event__homeActionPerformed
-
-    private void _ageStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event__ageStateChanged
-        // TODO add your handling code here:
-        _age_value.setText(String.valueOf(_age.getValue()));
-    }//GEN-LAST:event__ageStateChanged
 
     private void _heightInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event__heightInputMethodTextChanged
         // TODO add your handling code here:
@@ -446,7 +426,6 @@ public class Profile extends javax.swing.JFrame {
     private void _updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__updateActionPerformed
         // TODO add your handling code here:
         String name=_name.getText();
-        String age= String.valueOf(_age.getValue());
         String gender=_maleRB.isSelected()? "Male":_femaleRB.isSelected()? "Female":_otherRB.isSelected()? "Other":"";
         String phone=_phone.getText();
         String zodic=_zodic.getSelectedItem().toString();
@@ -455,13 +434,12 @@ public class Profile extends javax.swing.JFrame {
         String weight=_weight.getText();
         String bio=_bio.getText();
 
-        if(Helper.isEmpty(name)|| Helper.isEmpty(age)||Helper.isEmpty(gender)|| Helper.isEmpty(phone)||Helper.isEmpty(height)||Helper.isEmpty(weight)){
+        if(Helper.isEmpty(name)||Helper.isEmpty(gender)|| Helper.isEmpty(phone)||Helper.isEmpty(height)||Helper.isEmpty(weight)){
             JOptionPane.showMessageDialog(this, "Please fill all imformation!!","Can't Submit Form",HEIGHT);
         }else{
             this.userInfo[3]=name;
             this.userInfo[4]=gender;
             this.userInfo[5]=phone;
-            this.userInfo[6]=age;
             this.userInfo[7]=zodic;
             this.userInfo[8]=height;
             this.userInfo[9]=weight;
@@ -488,6 +466,13 @@ public class Profile extends javax.swing.JFrame {
     private void _zodicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__zodicActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event__zodicActionPerformed
+
+    private void _profile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__profile1ActionPerformed
+        // TODO add your handling code here:
+        Record record=new Record(this.userInfo,this.record);
+        setVisible(false);
+        record.setVisible(true);
+    }//GEN-LAST:event__profile1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -527,8 +512,6 @@ public class Profile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup _GenderGp;
-    private javax.swing.JSlider _age;
-    private javax.swing.JLabel _age_value;
     private javax.swing.JTextArea _bio;
     private javax.swing.JRadioButton _femaleRB;
     private javax.swing.JTextField _height;
@@ -539,6 +522,7 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JRadioButton _otherRB;
     private javax.swing.JTextField _phone;
     private javax.swing.JButton _profile;
+    private javax.swing.JButton _profile1;
     private javax.swing.JButton _update;
     private javax.swing.JTextField _weight;
     private javax.swing.JComboBox<String> _zodic;
@@ -547,7 +531,6 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;

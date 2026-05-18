@@ -3,6 +3,7 @@ import FileManager.FileManager;
 import javax.swing.JOptionPane;
 import dataController.Controller;
 import java.util.List;
+import java.util.ArrayList;
 import helper.Helper;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -33,12 +34,12 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         _username = new javax.swing.JTextField();
-        _password = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         Register = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         Login = new javax.swing.JButton();
+        _password = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,12 +48,6 @@ public class Login extends javax.swing.JFrame {
         _username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 _usernameActionPerformed(evt);
-            }
-        });
-
-        _password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                _passwordActionPerformed(evt);
             }
         });
 
@@ -87,15 +82,15 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_username, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(_username, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                            .addComponent(_password)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Register)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                         .addComponent(Login)))
                 .addGap(0, 6, Short.MAX_VALUE))
         );
@@ -108,8 +103,8 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_password)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
@@ -168,15 +163,17 @@ public class Login extends javax.swing.JFrame {
         String userName = _username.getText();
         String passwod = _password.getText();
         List<String[]> user = Controller.findvalueFromArr(userList, "userName", userName,new Integer[]{});
-
+        List<String[]> records=FileManager.getRecords(); 
+        
         if (user.size() != 0) {
+            ArrayList<String> record=Controller.getRecord(records, user.get(0)[12]);
             if (user.get(0)[2].equals(passwod)) {
                 if(Helper.isEmpty(user.get(0)[3])){
-                    Form form=new Form(user.get(0));
+                    Form form=new Form(user.get(0),record);
                 setVisible(false);
                 form.setVisible(true);
                 }else{
-                Home home=new Home(user.get(0));
+                Home home=new Home(user.get(0),record);
                 setVisible(false);
                 home.setVisible(true);
                 }   
@@ -197,10 +194,6 @@ public class Login extends javax.swing.JFrame {
         setVisible(false);
         register.setVisible(true);
     }//GEN-LAST:event_RegisterActionPerformed
-
-    private void _passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event__passwordActionPerformed
 
     private void _usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__usernameActionPerformed
         // TODO add your handling code here:
@@ -245,7 +238,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Login;
     private javax.swing.JButton Register;
-    private javax.swing.JTextField _password;
+    private javax.swing.JPasswordField _password;
     private javax.swing.JTextField _username;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

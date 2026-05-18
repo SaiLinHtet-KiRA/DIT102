@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import java.time.Year;
+import java.util.ArrayList;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this licensez
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,12 +20,16 @@ import javax.swing.JPanel;
  */
 public class Home extends javax.swing.JFrame {
     Helper helper=new Helper();
-    String[] userInfo=new String[12];
+    String[] userInfo=new String[13];
+    ArrayList<String> record = new ArrayList<>();
+
     /**
      * Creates new form NewJFrame
      */
-    public Home(String[] userInfo) {
+    public Home(String[] userInfo,ArrayList<String> record ) {
         this.userInfo=userInfo.clone();
+        this.record=record;
+        
 
         initComponents();
         _resultList.setLayout(new BoxLayout(_resultList, BoxLayout.Y_AXIS));
@@ -70,6 +76,7 @@ public class Home extends javax.swing.JFrame {
         _ListScroll = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         _resultList = new javax.swing.JPanel();
+        _profile1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(800, 600));
@@ -268,6 +275,11 @@ public class Home extends javax.swing.JFrame {
 
         _home.setText("Home");
         _home.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        _home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _homeActionPerformed(evt);
+            }
+        });
 
         _profile.setText("Profile");
         _profile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -278,6 +290,8 @@ public class Home extends javax.swing.JFrame {
         });
 
         _result.setText("Result");
+
+        _resultList.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout _resultListLayout = new javax.swing.GroupLayout(_resultList);
         _resultList.setLayout(_resultListLayout);
@@ -309,6 +323,14 @@ public class Home extends javax.swing.JFrame {
 
         _ListScroll.setViewportView(jPanel3);
 
+        _profile1.setText("Record");
+        _profile1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        _profile1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _profile1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -323,7 +345,8 @@ public class Home extends javax.swing.JFrame {
                                 .addGap(14, 14, 14)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(_home)
-                                    .addComponent(_profile)))
+                                    .addComponent(_profile)
+                                    .addComponent(_profile1)))
                             .addComponent(_result))
                         .addGap(87, 87, 87)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -332,17 +355,18 @@ public class Home extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(_home)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(_profile))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(_profile)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(_profile1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(_result)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(_ListScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
@@ -368,7 +392,7 @@ public class Home extends javax.swing.JFrame {
 
     private void _profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__profileActionPerformed
         // TODO add your handling code here:
-        Profile profile=new Profile(this.userInfo);
+        Profile profile=new Profile(this.userInfo,this.record);
         setVisible(false);
         profile.setVisible(true);
     }//GEN-LAST:event__profileActionPerformed
@@ -381,7 +405,9 @@ public class Home extends javax.swing.JFrame {
     private void _searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__searchActionPerformed
         // TODO add your handling code here:
 
-        String age= String.valueOf(_age.getValue());
+        int age= _age.getValue();
+        int currentYear = Year.now().getValue();
+        int birthYear=currentYear-age;
         String gender=_maleRB.isSelected()? "Male":_femaleRB.isSelected()? "Female":_otherRB.isSelected()? "Other":"";
         String zodic=_zodic.getSelectedItem().toString();
         String hobby=_hobby.getSelectedItem().toString();
@@ -392,7 +418,7 @@ public class Home extends javax.swing.JFrame {
 
         try {
             List<String[]> userList = FileManager.getAllUser();
-            List<String[]> result = Controller.findvalueFromArr(userList, "age", age,new Integer[]{});
+            List<String[]> result = Controller.findvalueFromArr(userList, "birthYear",birthYear+"",new Integer[]{});
             if(!(gender.isEmpty())){
                 result = Controller.findvalueFromArr(result, "gender", gender,new Integer[]{});
             }
@@ -407,9 +433,13 @@ public class Home extends javax.swing.JFrame {
                 result = Controller.findvalueFromArr(result, "weight", "",new Integer[]{minWeight, maxWeight});
             }
             _resultList.removeAll();
+            
             if (result.size() != 0) {
                 for(int i=0;i<result.size();i++){
-                    
+                    if (!this.record.contains(result.get(i)[0])) {
+    this.record.add(result.get(i)[0]);
+}
+
                 JPanel userCard=helper.createCrad(result.get(i));
                 _resultList.add(userCard);
                 _resultList.revalidate();
@@ -423,6 +453,8 @@ public class Home extends javax.swing.JFrame {
                 _resultList.repaint();
                 
             }
+            String record=String.join("|", this.record); 
+        FileManager.updateRecord(new String[]{this.userInfo[12], record});
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -491,6 +523,17 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event__maxWeightFocusLost
 
+    private void _profile1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__profile1ActionPerformed
+        // TODO add your handling code here:
+        Record record=new Record(this.userInfo,this.record);
+        setVisible(false);
+        record.setVisible(true);
+    }//GEN-LAST:event__profile1ActionPerformed
+
+    private void _homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__homeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event__homeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -542,6 +585,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField _minWeight;
     private javax.swing.JRadioButton _otherRB;
     private javax.swing.JButton _profile;
+    private javax.swing.JButton _profile1;
     private javax.swing.JLabel _result;
     private javax.swing.JPanel _resultList;
     private javax.swing.JButton _search;

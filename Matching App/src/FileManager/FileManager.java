@@ -64,7 +64,73 @@ public class FileManager {
         PrintStream out = new PrintStream(new FileOutputStream("src/db/user.txt", true));
         String line = "\n";
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 13; i++) {
+            try {
+                if (i == 0) {
+                    line = line.concat(arr[i]);
+                } else {
+                    line = line.concat("," + arr[i]);
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                line = line.concat("," + "");
+            }
+
+        }
+
+        out.append(line);
+        out.close();
+    }
+    public static List<String[]> getRecords() throws IOException {
+        List<String[]> recordList = new ArrayList<>();
+        Scanner in = new Scanner(new File("src/db/record.txt"));
+
+        while (in.hasNextLine()) {
+            String[] info = in.nextLine().split(",", -1);
+            recordList.add(info);
+        }
+        in.close();
+        return recordList;
+    }
+
+    public static void updateRecord(String[] RawRecord) throws IOException {
+    List<String[]> record = getRecords();
+    PrintWriter writer = new PrintWriter(new File("src/db/record.txt"));
+    
+    for (int i = 0; i < record.size(); i++) {
+        String[] arr = record.get(i);
+        String line = "";
+        if(i!=0){
+               line= line.concat("\n");
+            }
+        if (arr[0].equals(RawRecord[0])) {
+           
+            for (int z = 0; z < RawRecord.length; z++) {
+                if (z == 0) {
+                    line = line.concat(RawRecord[z]);
+                } else {
+                    line = line.concat("," + RawRecord[z]);
+                }
+
+            }
+        } else {
+            for (int z = 0; z < arr.length; z++) {
+                if (z == 0) {
+                    line = line.concat(arr[z]);
+                } else {
+                    line = line.concat("," + arr[z]);
+                }
+            }
+        }
+        writer.printf(line);
+       
+    } 
+    writer.close();
+    }
+    public static void addrecord(String[] arr) throws IOException {
+        PrintStream out = new PrintStream(new FileOutputStream("src/db/record.txt", true));
+        String line = "\n";
+
+        for (int i = 0; i < 2; i++) {
             try {
                 if (i == 0) {
                     line = line.concat(arr[i]);
@@ -81,5 +147,4 @@ public class FileManager {
         out.append(line);
         out.close();
     }
-    
 }

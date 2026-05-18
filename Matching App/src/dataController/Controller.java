@@ -5,8 +5,7 @@
 package dataController;
 
 import helper.Helper;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  *
@@ -27,7 +26,6 @@ public class Controller {
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
-                
             }
             
             if (!(target.isEmpty()) && arr[index].equalsIgnoreCase(target)) {
@@ -36,7 +34,15 @@ public class Controller {
         }
         return found;
     }
-
+    public static ArrayList<String> getRecord(List<String[]> list, String id) {
+    for (String[] row : list) {
+        if (id.equals(row[0])) {
+            String[] parts = row[1].split("\\|", -1);
+            return new ArrayList<>(Arrays.asList(parts));
+        }
+    }
+    return new ArrayList<>();
+}
     public static String getNewId(List<String[]> List) {
         try {
             String id = List.get(List.size() - 1)[0] ;
@@ -46,5 +52,7 @@ public class Controller {
             return "1";
         }
     }
-
+    public static String[] getArrRecord(String text) {
+       return text.split("|",-1);
+    }
 }

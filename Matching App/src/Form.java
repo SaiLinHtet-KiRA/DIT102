@@ -3,6 +3,7 @@ import FileManager.FileManager;
 import javax.swing.JOptionPane;
 import dataController.Controller;
 import helper.Helper;
+import java.util.ArrayList;
 import java.util.List;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,14 +15,16 @@ import java.util.List;
  * @author Sai Lin Htet
  */
 public class Form extends javax.swing.JFrame {
-    String[] userInfo=new String[12];
+    String[] userInfo=new String[13];
+    ArrayList<String> record = new ArrayList<>();
     /**
      * Creates new form NewJFrame
      */
-    public Form(String[] userInfo) {
+    public Form(String[] userInfo,ArrayList<String> record) {
         this.userInfo[0]=userInfo[0];
         this.userInfo[1]=userInfo[1];
         this.userInfo[2]=userInfo[2];
+        this.record=record;
         initComponents();
     }
 
@@ -37,7 +40,6 @@ public class Form extends javax.swing.JFrame {
         _GenderGp = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        _age = new javax.swing.JSlider();
         _maleRB = new javax.swing.JRadioButton();
         _femaleRB = new javax.swing.JRadioButton();
         _otherRB = new javax.swing.JRadioButton();
@@ -48,7 +50,6 @@ public class Form extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        _age_value = new javax.swing.JLabel();
         _phone = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -63,19 +64,10 @@ public class Form extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         _hobby = new javax.swing.JComboBox<>();
+        BirthYear = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(800, 600));
-
-        _age.setMaximum(60);
-        _age.setMinimum(16);
-        _age.setValue(16);
-        _age.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        _age.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                _ageStateChanged(evt);
-            }
-        });
 
         _GenderGp.add(_maleRB);
         _maleRB.setText("Male");
@@ -114,13 +106,11 @@ public class Form extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Age");
+        jLabel3.setText("Birth Year");
 
         jLabel4.setText("Gender");
 
         jLabel5.setText("Zodic");
-
-        _age_value.setText("16");
 
         _phone.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -161,6 +151,12 @@ public class Form extends javax.swing.JFrame {
 
         _hobby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Reading", "Painting", "Cycling", "Hiking", "Photography", "Yoga", "Gaming", "Running", "Gardening", "Music", "Baking", "Swimming", "Writing", "Chess", "Cooking", "Board Games", "Dancing", "Travel", "Drawing", "Camping", "Knitting", "Kayaking", "Puzzles", "Crafts", "Walking", "Woodworking", "Volunteering", "Makeup", "Tennis", "Skiing", "Piano", "Climbing", "Calligraphy", "Fishing", "Gym", "Art", "Singing", "Sketching", "Sewing", "Decor crafting", "Coding" }));
 
+        BirthYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BirthYearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -188,10 +184,6 @@ public class Form extends javax.swing.JFrame {
                                         .addComponent(_femaleRB)
                                         .addGap(18, 18, 18)
                                         .addComponent(_otherRB))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(_age, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(_age_value))
                                     .addComponent(_phone)
                                     .addComponent(_name)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -214,7 +206,8 @@ public class Form extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(_weight, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel10)))))))
+                                                .addComponent(jLabel10))))
+                                    .addComponent(BirthYear))))
                         .addGap(26, 26, 26))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -241,9 +234,8 @@ public class Form extends javax.swing.JFrame {
                     .addComponent(_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_age, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(_age_value))
+                    .addComponent(BirthYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_otherRB)
@@ -278,8 +270,6 @@ public class Form extends javax.swing.JFrame {
                 .addGap(57, 57, 57))
         );
 
-        _age.getAccessibleContext().setAccessibleName("");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -294,7 +284,7 @@ public class Form extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -313,8 +303,10 @@ public class Form extends javax.swing.JFrame {
 
     private void _submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__submitActionPerformed
         // TODO add your handling code here:
+        System.out.println("this.userInfo: "+this.userInfo.length);
+
         String name=_name.getText();
-        String age= String.valueOf(_age.getValue());
+        String birthYear= String.valueOf(BirthYear.getText());
         String gender=_maleRB.isSelected()? "Male":_femaleRB.isSelected()? "Female":_otherRB.isSelected()? "Other":"";
         String phone=_phone.getText();
         String zodic=_zodic.getSelectedItem().toString();
@@ -323,34 +315,33 @@ public class Form extends javax.swing.JFrame {
         String weight=_weight.getText();
         String bio=_bio.getText();
 
-        if(Helper.isEmpty(name)|| Helper.isEmpty(age)||Helper.isEmpty(gender)|| Helper.isEmpty(phone)||Helper.isEmpty(height)||Helper.isEmpty(weight)){
+        if(Helper.isEmpty(name)|| Helper.isEmpty(birthYear)||Helper.isEmpty(gender)|| Helper.isEmpty(phone)||Helper.isEmpty(height)||Helper.isEmpty(weight)){
             JOptionPane.showMessageDialog(this, "Please fill all imformation!!","Can't Submit Form",HEIGHT);
         }else{
            this.userInfo[3]=name;
            this.userInfo[4]=gender;
            this.userInfo[5]=phone;
-           this.userInfo[6]=age;
+           this.userInfo[6]=birthYear;
            this.userInfo[7]=zodic;
           this.userInfo[8]=height;
           this.userInfo[9]=weight;
           this.userInfo[10]=hobby;
           this.userInfo[11]=bio;
         try {
+            List<String[]> recordList = FileManager.getRecords();
+            String[] arr = { Controller.getNewId(recordList) };
+            this.userInfo[12]=arr[0];
+            FileManager.addrecord(arr);
            FileManager.updateUser(this.userInfo);
-           Home home=new Home(this.userInfo);
+           Home home=new Home(this.userInfo,this.record);
             setVisible(false);
             home.setVisible(true);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.toString()+e.getMessage());
             System.exit(0);
         }  
         }
     }//GEN-LAST:event__submitActionPerformed
-
-    private void _ageStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event__ageStateChanged
-        // TODO add your handling code here:
-        _age_value.setText(String.valueOf(_age.getValue()));
-    }//GEN-LAST:event__ageStateChanged
 
     private void _heightKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event__heightKeyReleased
         // TODO add your handling code here:
@@ -410,6 +401,10 @@ public class Form extends javax.swing.JFrame {
 
     }//GEN-LAST:event__heightInputMethodTextChanged
 
+    private void BirthYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BirthYearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BirthYearActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -447,9 +442,8 @@ public class Form extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField BirthYear;
     private javax.swing.ButtonGroup _GenderGp;
-    private javax.swing.JSlider _age;
-    private javax.swing.JLabel _age_value;
     private javax.swing.JTextArea _bio;
     private javax.swing.JRadioButton _femaleRB;
     private javax.swing.JTextField _height;

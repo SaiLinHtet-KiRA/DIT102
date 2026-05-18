@@ -5,6 +5,7 @@
 package helper;
 import java.awt.Panel;
 import javax.swing.*;
+import java.time.Year;
 /**
  *
  * @author Sai Lin Htet
@@ -17,11 +18,12 @@ public class Helper {
                                 : field == "name" ? 3
                                         : field == "gender" ? 4
                                                 : field == "phone" ? 5
-                                                        : field == "age" ? 6
+                                                        : field == "birthYear" ? 6
                                                                 : field == "zodiac sign" ? 7
                                                                         : field == "height" ? 8
                                                                                 : field == "weight" ? 9
-                                                                                        : field == "hobby" ? 10 : 11;
+                                                                                        : field == "hobby" ? 10 
+                                                                                            : field == "bio" ? 11: 12;
     }
 
     public static String indexToField(int index) {
@@ -31,11 +33,12 @@ public class Helper {
                                 : index == 3 ? "name"
                                         : index == 4 ? "gender"
                                                 : index == 5 ? "phone"
-                                                        : index == 6 ? "age"
+                                                        : index == 6 ? "birthYear"
                                                                 : index == 7 ? "zodiac sign"
                                                                         : index == 8 ? "height"
                                                                                 : index == 9 ? "weight"
-                                                                                        : index == 10 ? "hobby" : "bio";
+                                                                                        : index == 10 ? "hobby" 
+                                                                                            : index == 11 ? "bio":"record";
     }
     public static boolean isEmpty(String text) {
         if(text.isEmpty()){
@@ -44,6 +47,8 @@ public class Helper {
         return false;
     }
     public  JPanel createCrad(String[] userInfo) {
+        int currentYear = Year.now().getValue();
+        int age = currentYear - Integer.parseInt(userInfo[6]);
       String profile= userInfo[4].equalsIgnoreCase("Male")? "/assets/male.png":userInfo[4].equalsIgnoreCase("Female")? "/assets/female.png":"/assets/other.png";
          javax.swing.JPanel UserCard = new javax.swing.JPanel();
       javax.swing.JLabel  _profile = new javax.swing.JLabel();
@@ -66,7 +71,7 @@ public class Helper {
         _name.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         _name.setText(userInfo[3]);
 
-        _age.setText("age: "+userInfo[6]);
+        _age.setText("age: "+age);
 
         _phone.setText("phone: "+userInfo[5]);
 
@@ -155,6 +160,52 @@ public class Helper {
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
         jLabel3.setText("We didn't find your soulmate.");
+
+        javax.swing.GroupLayout _notFindContainerLayout = new javax.swing.GroupLayout(_notFindContainer);
+        _notFindContainer.setLayout(_notFindContainerLayout);
+        _notFindContainerLayout.setHorizontalGroup(
+            _notFindContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(_notFindContainerLayout.createSequentialGroup()
+                .addGroup(_notFindContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(_notFindContainerLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel3))
+                    .addGroup(_notFindContainerLayout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(jLabel2))
+                    .addGroup(_notFindContainerLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        _notFindContainerLayout.setVerticalGroup(
+            _notFindContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(_notFindContainerLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        return _notFindContainer;
+    }
+    public  JPanel createEmptyPanel() {
+   javax.swing.JPanel _notFindContainer = new javax.swing.JPanel();
+    javax.swing.JLabel    jLabel2 = new javax.swing.JLabel();
+      javax.swing.JLabel  jLabel1 = new javax.swing.JLabel();
+      javax.swing.JLabel  jLabel3 = new javax.swing.JLabel();
+
+
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 26)); // NOI18N
+        jLabel2.setText("Sorry!!!");
+
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLabel1.setText("Find your soulmate first.");
+
+        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLabel3.setText("Your history is empty!!!");
 
         javax.swing.GroupLayout _notFindContainerLayout = new javax.swing.GroupLayout(_notFindContainer);
         _notFindContainer.setLayout(_notFindContainerLayout);
